@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Franz Midterm Project</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Hero Section */
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background: #333;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background-image: url('PP.jpg'); /* Set background image */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* Parallax effect */
+    }
+    
+    /* Overlay gradient for background */
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)); /* Gradient overlay */
+        z-index: 1;
+    }
+
+    .hero-banner img {
+        position: absolute;
+        width: 120%;
+        height: auto;
+        animation: zoomIn 15s infinite alternate;
+        filter: blur(0px); /* Apply slight blur to the background */
+    }
+
+    /* Text and Title Styling */
+    .hero-content {
+        position: relative;
+        text-align: center;
+        z-index: 2;
+        opacity: 0; /* Initially hide the content */
+        animation: fadeIn 2s ease-out forwards; /* Fade in */
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        margin: 20px;
+        opacity: 0;
+        animation: typing 4s steps(30) 1s forwards, fadeIn 2s ease-out 1s forwards; /* Typing + fade-in */
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    @keyframes typing {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
+        }
+    }
+
+    .hero-title strong {
+        color: #c770f0;
+    }
+
+    .features-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        opacity: 0; /* Initially hide the features */
+        animation: fadeIn 3s ease-out 1s forwards; /* Fade in after a delay */
+    }
+
+    /* Features Section */
+    .features {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .feature-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        opacity: 0;
+        animation: slideUp 1s ease-out forwards; /* Slide in effect */
+    }
+
+    /* Animation for Slide In Effect */
+    @keyframes slideUp {
+        0% {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .feature-item:nth-child(1) {
+        animation-delay: 0.5s;
+    }
+
+    .feature-item:nth-child(2) {
+        animation-delay: 1s;
+    }
+
+    .feature-item:nth-child(3) {
+        animation-delay: 1.5s;
+    }
+
+    .feature-item:nth-child(4) {
+        animation-delay: 2s;
+    }
+
+    /* Adding a rotate animation to feature boxes */
+    .feature-box {
+        width: 120px;
+        height: 120px;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        animation: rotateIn 1s ease-out forwards; /* Rotate in on page load */
+    }
+
+    @keyframes rotateIn {
+        0% {
+            transform: rotate(360deg);
+            opacity: 0;
+        }
+        100% {
+            transform: rotate(0);
+            opacity: 1;
+        }
+    }
+
+    .feature-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .feature-box:hover img {
+        transform: scale(1.1);
+    }
+
+    /* Adding animated border effect for buttons */
+    .btn {
+        display: inline-block;
+        padding: 10px 18px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 12px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-primary {
+        background-color: #c770f0;
+        color: white;
+        border: 2px solid transparent;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background-color: #000000;
+        transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+        border-radius: 50%;
+        z-index: 0;
+        transform: translate(-50%, -50%);
+    }
+
+    .btn-primary:hover {
+        background-color: #a55fd4;
+        transform: scale(1.1);
+    }
+
+    .btn-primary:hover::before {
+        width: 0;
+        height: 0;
+        top: 50%;
+        left: 50%;
+    }
+
+    .blue {
+        background-color: #4a90e2;
+    }
+
+    .blue:hover {
+        background-color: #357ac9;
+    }
+
+    /* Animation for Fade In Effect */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* Animation for Zoom Effect */
+    @keyframes zoomIn {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    /* Flying Icon Animation */
+    .flying-icon-container {
+        position: absolute;
+        top: 20%;
+        left: 0;
+        z-index: 10; /* Ensure it stays on top of other content */
+    }
+
+    .flying-icon {
+        width: 50px;
+        height: 50px;
+        animation: flyAcrossScreen 10s linear infinite;
+    }
+
+    /* Keyframes for flying animation */
+    @keyframes flyAcrossScreen {
+        0% {
+            left: -60px; /* Start from left outside of the screen */
+            top: 20%; /* You can adjust this based on where you want the icon to start */
+        }
+        25% {
+            top: 10%; /* Move slightly up */
+        }
+        50% {
+            left: 50%; /* Move to the center horizontally */
+            top: 50%; /* Move down to the center vertically */
+        }
+        75% {
+            top: 80%; /* Move down more */
+        }
+        100% {
+            left: 100%; /* Move out of the screen on the right side */
+            top: 20%; /* Reset vertical position */
+        }
+    }
+
+  </style>
+
+</head>
+<body>
+  <main>
+    <article>
+      <section class="hero" id="home">
+        <div class="container">
+          <div class="hero-banner">
+            <img src="PP.jpg" width="800" height="864" alt="Franz Photo" class="img-cover">
+          </div>
+
+          <div class="hero-content">
+            <h2 class="hero-title">
+              <span>I'm </span>
+              <strong>Francis B. Otapel </strong><br>
+              Flutter Developer
+            </h2>
+
+            <div class="features-container">
+              <div class="features">
+                  <div class="feature-item">
+                      <a href="https://drive.google.com/file/d/1MnSevtKUIyOPMXdDIeSfJ1m5u2702xTq/view?usp=sharing" class="feature-box"><img src="Franz.jpg" alt="Feature 1"></a> 
+                      <a href="https://drive.google.com/file/d/1MnSevtKUIyOPMXdDIeSfJ1m5u2702xTq/view?usp=sharing" class="btn btn-primary blue">Hello World App</a>
+                  </div>
+          
+                  <div class="feature-item">
+                      <a href="https://drive.google.com/file/d/1_wyznQnMl2asOUqvvIQ8Imr3jNxTxQCU/view?usp=sharing" class="feature-box"><img src="Franz TD.jpg" alt="Feature 2"></a> 
+                      <a href="https://drive.google.com/file/d/1_wyznQnMl2asOUqvvIQ8Imr3jNxTxQCU/view?usp=sharing" class="btn btn-primary blue">To-Do App</a>
+                  </div>
+          
+                  <div class="feature-item">
+                      <a href="https://drive.google.com/file/d/1TN4ci1_qRs3-z0lTFsIgKz-GGavO56qx/view?usp=sharing" class="feature-box"><img src="Franz SC.jpg" alt="Feature 3"></a> 
+                      <a href="https://drive.google.com/file/d/1TN4ci1_qRs3-z0lTFsIgKz-GGavO56qx/view?usp=sharing" class="btn btn-primary blue">Quiz Recorder App</a>
+                  </div>
+          
+                  <div class="feature-item">
+                      <a href="https://drive.google.com/file/d/1d4yYIRqfS_QcUxw1zZAheTJp3K7f5A0M/view?usp=sharing" class="feature-box"><img src="Franz F.png" alt="Feature 4"></a> 
+                      <a href="https://drive.google.com/file/d/1d4yYIRqfS_QcUxw1zZAheTJp3K7f5A0M/view?usp=sharing" class="btn btn-primary blue">Firebase App</a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
